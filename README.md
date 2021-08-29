@@ -19,3 +19,7 @@ location : ./font-end
 -The front end connects to the back end via RESI API GET Call
 -The font end system is built with HTML,CSS and JS
 -- Front-end is current being tested on AWS s3, with future plans to run it on an EC2 running Node.js
+
+
+references : 
+https://blog.stevenlevithan.com/archives/date-time-format
