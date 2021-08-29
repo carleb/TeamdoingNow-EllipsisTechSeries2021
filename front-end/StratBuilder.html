@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Jerry</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/design.css" rel="stylesheet">
+</head>
+
+<body onLoad='getStockGraph()'>
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <nav class="nav nav-masthead justify-content-center" style='margin-right:20px;margin-top:10px;'>
+                <a class="nav-link" href="home.html">Home</a>
+                <a class='nav-link active' href='#'>Strategy Builder</a>
+                <a class='nav-link' href='Strategies.html'>My Strategies</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div>
+                    <div>
+                        <h3 style='font-weight:600px; color: rgb(153, 155, 153); margin: 8px 12px;'>Strategy Builder
+                        </h3>
+                    </div>
+                    <div class="sidebar-sticky">
+                        <input type='text' class='form-control' placeholder="Search Indicators:">
+                        <br>
+                        <p style="font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;">Recommended
+                            Indicators:</p>
+                        <div class='row'>
+                            <button data-toggle="tooltip" title="What does this indicator do?
+Smooths out price trends by filtering out “noise”
+from random short-term price fluctuations" data-placement="top" class='btn btn-outline-dark' id='button1'
+                                onclick='addIndicator(this.id)' name='Moving Average' style='margin-top:10px;'>+Moving
+                                Average</button>
+                            <button data-toggle="tooltip" title="What does this indicator do?
+Moving Average Convergence Divergence (MACD) is a trend-following momentum
+indicator that shows the relationship between two moving averages of a security's price. 
+Traders use the MACD to identify when bullish or bearish momentum is high in 
+order to identify entry and exit points for trades." data-placement="top" class='btn btn-outline-dark' id='button2'
+                                onclick='addIndicator3(this.id)' name='MACD' style='margin-top:10px;'>+MACD</button>
+                            <button data-toggle="tooltip" title="What does this indicator do?
+Fractals are indicators on candlestick charts that identify reversal points in the market.
+Traders often use fractals to get an idea about the direction in which the price will develop.
+A fractal will form when a particular price pattern happens on a chart." data-placement="top"
+                                class='btn btn-outline-dark' id='button3' onclick='addIndicator2(this.id)'
+                                name='Fractals' style='margin-top:10px;'>+Fractals</button>
+
+
+                            <div id='indicatorMenu1' class='row' style="border: 1px black solid;display:none;">
+                                <p style="font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;"
+                                    id='indicator'></p>
+                                <p style="font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;">Inputs:
+                                </p>
+                                <ul style="font-weight: bold ; color: rgb(153, 155, 153); margin-left:60px">
+                                    <li>Length: <span id='lengthInput'>9</span></li>
+                                    <li>Source: <span id='sourceInput'>Close</span></li>
+                                    <li>Offset: <span id='offsetInput'>0</span></li>
+                                </ul>
+                                <button type='button' id='before1' class='btn btn-outline-dark' data-toggle='modal'
+                                    data-target="#myModal"
+                                    style='margin-top:30px;margin-bottom:20px;margin-left:12px;'>Add Logic</button>
+                                <hr>
+                                <h5 id='afterH1' style='display:none;margin: 0px 12px;'>Logic:</h5>
+                                <p id='after1'
+                                    style='display:hidden;font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;'>
+                                </p>
+                            </div>
+
+                            <div id='indicatorMenu2' class='row' style="border: 1px black solid;display:none;">
+                                <p style="font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;"
+                                    id='indicator2'></p>
+                                <p style="font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;">Inputs:
+                                </p>
+                                <ul style="font-weight: bold ; color: rgb(153, 155, 153); margin-left:60px">
+                                    <li>Period: <span id='lengthInput'>2</span></li>
+                                </ul>
+                                <button type='button' id='before2' class='btn btn-outline-dark' data-toggle='modal'
+                                    data-target='#myModal2'
+                                    style='margin-top:30px;margin-bottom:20px;margin-left:12px;'>Add Logic</button>
+                                <hr>
+                                <h5 id='afterH2' style='display:none;margin: 0px 12px;'>Logic:</h5>
+                                <p id='after2'
+                                    style='display:hidden;font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;'>
+                                </p>
+                            </div>
+                            <div id='indicatorMenu3' class='row' style="border: 1px black solid;display:none;">
+                                <p style="font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;"
+                                    id='indicator3'></p>
+                                <p style="font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;">Inputs:
+                                </p>
+                                <ul style="font-weight: bold ; color: rgb(153, 155, 153); margin-left:60px">
+                                    <li>Length: <span id='lengthInput'>9</span></li>
+                                    <li>Source: <span id='sourceInput'>Close</span></li>
+                                    <li>Offset: <span id='offsetInput'>0</span></li>
+                                </ul>.
+                                <button type='button' id='before3' class='btn btn-outline-dark' data-toggle='modal'
+                                    data-target='#myModal3'
+                                    style='margin-top:30px;margin-bottom:20px;margin-left:12px;'>Add Logic</button>
+                                <hr>
+                                <h5 id='afterH3' style='display:none;margin: 0px 12px;'>Logic:</h5>
+                                <p id='after3'
+                                    style='display:none;font-weight: bold ; color: rgb(153, 155, 153); margin: 0px 12px;'>
+                                </p>
+                            </div>
+                            <button id='testBtn' style='margin-top: 20px;display: none;' data-toggle="modal"
+                                data-target="#finalModal" class='btn btn-outline-danger' type='button'>Test
+                                Strategy</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div style='margin-left:500px; margin-top: 60px;''>
+                    <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless"
+                        src="about:blank" position="relative" height="800px" width="1570px"
+                        max-width="100%"></iframe>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+    <!-- First Indicator -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style='background-color: #333;'>
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id='myModalTitle'></h4>
+                    <p class="modal-title">*The default values below are recommended.
+                    <p>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class='row'>
+                        <div class='col-md-6'>
+                            <h6 style='font-weight:600;font-size:20px;'>Input</h6>
+                            <label>Length</label><input class='form-control' id='maLength' style='width:35%;' value='9'
+                                type='number'>
+                            <!-- Dropdown-->
+                            <br>
+                            <label>Source</label>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="maSource"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Close
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" id='MAopt1' name='Close'
+                                        onclick='MAdd(this.id,"maSource")'>Close</a>
+                                    <a class="dropdown-item" id='MAopt2' name='Open' onclick='MAdd(this.id,"maSource")'
+                                        href="#">Open</a>
+                                </div>
+                            </div>
+                            <br>
+                            <label>Offset</label><input class='form-control' style='width:35%;' value='0' id='maOffset'
+                                type='number'>
+                        </div>
+                        <div class='col-md-6'>
+                            <h6 style='font-weight:600;font-size:20px;'>Logic Builder for <span
+                                    id='myModalTitle2'></span></h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h8 style="text-decoration: underline;">Order Direction</h8>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="OD"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Buy
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" id='MAopt3' name='Buy'
+                                                onclick='MAdd(this.id,"OD")'>Buy</a>
+                                            <a class="dropdown-item" id='MAopt4' name='Sell'
+                                                onclick='MAdd(this.id,"OD")' href="#">Sell</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h8 style="text-decoration: underline;">Timeframe</h8>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="TF"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            1 Day
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" id='MAopt5' name='4h'
+                                                onclick='MAdd(this.id,"TF")'>4h</a>
+                                            <a class="dropdown-item" id='MAopt6' name='1 Day'
+                                                onclick='MAdd(this.id,"TF")' href="#">1 Day</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    style="text-align: center; background-color: grey; margin-top: 20px; margin-left: 11px; width: 80%; padding-bottom: 15px; padding-top: 5px; border-style: solid 1px #333;border-radius: 15px;">
+                                    <h8 style="text-decoration: underline; ">
+                                        When to place order
+                                    </h8>
+                                    <div class="row">
+                                        <div class="col-md-5" style="text-align: left;">
+                                            <br>
+                                            <h8 style="text-decoration: underline;">
+                                                Slope:
+                                            </h8>
+                                            <br>
+                                            <br>
+                                            <h8 style="text-decoration: underline;">
+                                                Buy when:
+                                            </h8>
+                                            <br>
+                                            <br>
+                                            <h8 style="text-decoration: underline;">
+                                                Place order:
+                                            </h8>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="dropdown" style="margin-top: 14px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="slope" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Upwards
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" id='MAopt7' name='Upwards'
+                                                        onclick='MAdd(this.id,"slope")'>Upwards</a>
+                                                    <a class="dropdown-item" id='MAopt8' name='Downwards'
+                                                        onclick='MAdd(this.id,"slope")' href="#">Downwards</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="dropdown" style="margin-top: 12px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="buyWhen" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Price Above MA
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" id='MAopt9' name='Price Above MA'
+                                                        onclick='MAdd(this.id,"buyWhen")'>Price Above MA</a>
+                                                    <a class="dropdown-item" id='MAopt10' name='Price Below MA'
+                                                        onclick='MAdd(this.id,"buyWhen")' href="#">Price Below MA</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="dropdown" style="margin-top: 12px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="placeOrder" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Immediately
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" id='MAopt11' name='Immediately'
+                                                        onclick='MAdd(this.id,"placeOrder")'>Immediately</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="editIndicator1()">Close
+                        and Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Second Indicator -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style='background-color: #333;'>
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <div class="col">
+                        <h4 class="modal-title">Fractals</h4>
+                        <p class="modal-title" style="font-size: smaller;">*The default values below are recommended.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class='row'>
+                        <h6 style='font-weight:600;font-size:20px;'>Logic Builder for Fractals</h6>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h8 style="text-decoration: underline;">Order Direction</h8>
+                                <div class="dropdown" style="margin-top:5px;">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="OD2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Buy
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" id='MAopt12' name='Buy'
+                                            onclick='MAdd(this.id,"OD2")'>Buy</a>
+                                        <a class="dropdown-item" id='MAopt13' name='Sell' onclick='MAdd(this.id,"OD2")'
+                                            href="#">Sell</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <h8 style="text-decoration: underline;">Timeframe</h8>
+                                <div class="dropdown" style="margin-top:5px;">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="TF2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        1 Day
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" id='MAopt14' name='4h'
+                                            onclick='MAdd(this.id,"TF2")'>4h</a>
+                                        <a class="dropdown-item" id='MAopt15' name='1 Day' onclick='MAdd(this.id,"TF2")'
+                                            href="#">1 Day</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                style="text-align: center; background-color: grey; margin-top: 20px; margin-left: 11px; width: 100%; padding-bottom: 15px; padding-top: 5px; padding-right: 35px;border-style: solid 1px #333; border-radius: 15px;">
+                                <h8 style="text-decoration: underline; ">
+                                    When to place order
+                                </h8>
+                                <div class="row">
+                                    <div class="col-md-5" style="text-align: left;">
+                                        <br>
+                                        <h8 style="text-decoration: underline; font-size: smaller;">
+                                            Signal Given:
+                                        </h8>
+                                        <br>
+                                        <br>
+                                        <h8 style="text-decoration: underline; font-size: smaller;">
+                                            Place order:
+                                        </h8>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="dropdown" style="margin-top: 14px;">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="fractal"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Bullish Fractal
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" id='MAopt16' name='Bullish Fractal'
+                                                    onclick='MAdd(this.id,"fractal")'>Bullish Fractal</a>
+                                                <a class="dropdown-item" id='MAopt17' name='Bearish Fractal'
+                                                    onclick='MAdd(this.id,"fractal")' href="#">Bearish Fractal</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="dropdown" style="margin-top: 12px;">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="placeOrder2" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Immediately
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" id='MAopt18' name='Immediately'
+                                                    onclick='MAdd(this.id,"placeOrder2")'>Immediately</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="editIndicator2()" data-dismiss="modal"
+                        on>Close and Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Indicator -->
+    <div class="modal" id="myModal3">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style='background-color: #333;'>
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id='myModal3Title'></h4>
+                    <p class="modal-title">*The default values below are recommended.
+                    <p>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class='row'>
+                        <div class='col-md-6'>
+                            <h6 style='font-weight:600;font-size:20px;'>Input</h6>
+                            <label>Length</label><input class='form-control' id='maLength1' style='width:35%;' value='9'
+                                type='number'>
+                            <!-- Dropdown-->
+                            <br>
+                            <label>Source</label>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="maSource1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Close
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" id='MACD1' name='Close'
+                                        onclick='MAdd(this.id,"maSource")'>Close</a>
+                                    <a class="dropdown-item" id='MACD2' name='Open' onclick='MAdd(this.id,"maSource1")'
+                                        href="#">Open</a>
+                                </div>
+                            </div>
+                            <br>
+                            <label>Offset</label><input class='form-control' style='width:35%;' value='0' id='maOffset1'
+                                type='number'>
+                        </div>
+                        <div class='col-md-6'>
+                            <h6 style='font-weight:600;font-size:20px;'>Logic Builder for <span
+                                    id='myModal3Title'></span></h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h8 style="text-decoration: underline;">Order Direction</h8>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="OD1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Buy
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" id='MACD3' name='Buy'
+                                                onclick='MAdd(this.id,"OD1")'>Buy</a>
+                                            <a class="dropdown-item" id='MACD4' name='Sell'
+                                                onclick='MAdd(this.id,"OD1")' href="#">Sell</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h8 style="text-decoration: underline;">Timeframe</h8>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="TF1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            1 Day
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" id='MACD5' name='4h'
+                                                onclick='MAdd(this.id,"TF1")'>4h</a>
+                                            <a class="dropdown-item" id='MACD6' name='1 Day'
+                                                onclick='MAdd(this.id,"TF1")' href="#">1 Day</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    style="text-align: center; background-color: grey; margin-top: 20px; margin-left: 11px; width: 80%; padding-bottom: 15px; padding-top: 5px; border-style: solid 1px #333;border-radius: 15px;">
+                                    <h8 style="text-decoration: underline; ">
+                                        When to place order
+                                    </h8>
+                                    <div class="row">
+                                        <div class="col-md-5" style="text-align: left;">
+                                            <br>
+                                            <h8 style="text-decoration: underline;">
+                                                Slope:
+                                            </h8>
+                                            <br>
+                                            <br>
+                                            <h8 style="text-decoration: underline;">
+                                                Buy when:
+                                            </h8>
+                                            <br>
+                                            <br>
+                                            <h8 style="text-decoration: underline;">
+                                                Place order:
+                                            </h8>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="dropdown" style="margin-top: 14px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="slope" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Upwards
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" id='MACD7' name='Upwards'
+                                                        onclick='MAdd(this.id,"slope1")'>Upwards</a>
+                                                    <a class="dropdown-item" id='MACD8' name='Downwards'
+                                                        onclick='MAdd(this.id,"slope1")' href="#">Downwards</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="dropdown" style="margin-top: 12px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="buyWhen1" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Price Above MA
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" id='MACD9' name='Price Above MA'
+                                                        onclick='MAdd(this.id,"buyWhen1")'>Price Above MA</a>
+                                                    <a class="dropdown-item" id='MACD10' name='Price Below MA'
+                                                        onclick='MAdd(this.id,"buyWhen1")' href="#">Price Below MA</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="dropdown" style="margin-top: 12px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="placeOrder" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Immediately
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" id='MACD11' name='Immediately'
+                                                        onclick='MAdd(this.id,"placeOrder1")'>Immediately</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="editIndicator3()">Close
+                        and Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Finalise Strat -->
+    <div class="modal" id="finalModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style='background-color: #333;'>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <div class="row">
+                        <div>
+                            <h4 class="modal-title">Finalise Strategy</h4>
+                        </div>
+                        <div>
+                            <p class="modal-title">The default values below are recommended.</p>
+                            <p class="modal-title">Trades are placed when all logics indicate a BUY</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class='row'>
+                        <div class='col-md-5'>
+                            <h6 style='font-weight:600;font-size:15px; text-decoration: underline;'>Order Placement per
+                                Trade</h6>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6 style='font-weight:600;font-size:14px; text-decoration: underline;'>Take Profit
+                                    </h6>
+                                    <div class="dropdown" style="margin-top:5px;">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="TP"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            10%
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" id='TP2' name='2%'
+                                                onclick='MAdd(this.id,"TP")'>2%</a>
+                                            <a class="dropdown-item" id='TP5' name='5%' onclick='MAdd(this.id,"TP")'
+                                                href="#">5%</a>
+                                            <a class="dropdown-item" id='TP10' name='10%' onclick='MAdd(this.id,"TP")'
+                                                href="#">10%</a>
+                                            <a class="dropdown-item" id='TP15' name='15%' onclick='MAdd(this.id,"TP")'
+                                                href="#">15%</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 style='font-weight:600;font-size:14px; text-decoration: underline;'>Stop Loss
+                                    </h6>
+                                    <div class="dropdown" style="margin-top:5px;">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="SL"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            5%
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" id='SL2' name='2%'
+                                                onclick='MAdd(this.id,"SL")'>2%</a>
+                                            <a class="dropdown-item" id='SL5' name='5%' onclick='MAdd(this.id,"SL")'
+                                                href="#">5%</a>
+                                            <a class="dropdown-item" id='SL10' name='10%' onclick='MAdd(this.id,"SL")'
+                                                href="#">10%</a>
+                                            <a class="dropdown-item" id='SL15' name='15%' onclick='MAdd(this.id,"SL")'
+                                                href="#">15%</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <h6 style='font-weight:600;font-size:14px; text-decoration: underline;'>Order Size</h6>
+                            <div class="dropdown" style="margin-top:5px;">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="OS"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    1/5 of Cash
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" id='OS1' name='1/5 of Cash'
+                                        onclick='MAdd(this.id,"OS")'>1/5 of Cash</a>
+                                    <a class="dropdown-item" id='OS2' name='2/5 of Cash' onclick='MAdd(this.id,"OS")'
+                                        href="#">2/5 of Cash</a>
+                                    <a class="dropdown-item" id='OS3' name='3/5 of Cash' onclick='MAdd(this.id,"OS")'
+                                        href="#">3/5 of Cash</a>
+                                    <a class="dropdown-item" id='OS4' name='4/5 of Cash' onclick='MAdd(this.id,"OS")'
+                                        href="#">4/5 of Cash</a>
+                                    <a class="dropdown-item" id='OS5' name='All of Cash' onclick='MAdd(this.id,"OS")'
+                                        href="#">All of Cash</a>
+                                </div>
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-dark" onclick='testStrategy()'>Finalise Logic</button>
+
+                        </div>
+                        <div class='col-md-5'>
+                            <div class="col">
+                                <h6 style='font-weight:600;font-size:15px; text-decoration: underline;'>Past Data</h6>
+                                <h6 style='font-weight:600;font-size:12px;'>Finalise Logic to see back-test results</h6>
+                                <div id='showData'>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src='/js/StratBuilder.js'></script>
+</body>
+
+</html>

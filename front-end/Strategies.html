@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Jerry</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src='/js/StratBuilder.js'></script>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/cover.css" rel="stylesheet">
+
+    <style>
+        .stockName, .stockDes {
+            font-weight: 600px;
+            color: rgb(153, 155, 153)
+        }
+    </style>
+</head>
+
+<body class="text-center" onload='showStrategy()'>
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand" style="position: absolute;">Team doingNOW</h3>
+                <nav class="nav nav-masthead justify-content-center" style="position: relative; margin-left:300px">
+                    <a class="nav-link" href="home.html">Home</a>
+                    <a class='nav-link' href='StratBuilder.html'>Strategy Builder</a>
+                    <a class='nav-link active' href='Strategies.html'>My Strategies</a>
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" clasfs="inner cover">
+            <h1 class="cover-heading">My Strategies</h1>
+            <p class="lead">Your strategies are saved here. Edit and Diversity your Strategy.
+            </p>
+            <div class="container"
+                style='border-style: 1px solid #333;border-radius: 15px; background-color:white;padding-bottom: 20px;'>
+                <h3 style='font-weight:600px; color: rgb(153, 155, 153)'>Stock #1:</h3>
+                <div class="row" style='text-align: left !important;'>
+                    <div class='col-md-4'>
+                        <img height='150' width='150' id='stockImage' src="">
+                    </div>
+                    <div class='col-md-8'>
+                        <div class='row'>
+                            <p id='stockName' style='font-size:20px;' class='stockName'></p>
+                            <p class='stockName' style='font-size:15px;text-decoration: underline;'>Logic:</p>
+                            <p id='stockDes' class='stockDes'></p>
+                            <p class='stockDes'><span id='TP'></span> <br> <span id='SL'></span> <br> <span id='OS'></span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" value='' id='stockSelected' onclick=(selectStockByValue(this.id)) 
+                            class="btn btn-outline-dark">Revise my strategy
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button type='button' class='btn btn-light' style='margin-top:30px;' data-toggle='modal' data-target='#stratModal'>Diversify my
+                strategy</button>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Ellipsis Hackathon 2021, Team doingNow</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Strategies Modal -->
+    <div class="modal" id="stratModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style='background-color: #333;'>
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <div>
+                        <h4 class="modal-title">Diversify Strategy</h4>
+                    </div>
+                    <div>
+                        <p class="modal-title">We recommend diversifying into other stocks.</p>
+                    </div>
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class='col-md-4'>
+                            <p style='margin-top:7px;font-size:16px;'>Number of Stocks to Diversify:</p>
+
+                        </div>
+                        <div class='col-md-1'>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" width="30%" type="button" id="numDiv"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    5
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" id='numDiv1' name='1'
+                                            >1</a>
+                                    <a class="dropdown-item" id='numDiv2' name='2'
+                                        href="#">2</a>
+                                    <a class="dropdown-item" id='numDiv3' name='3'
+                                        href="#">3</a>
+                                    <a class="dropdown-item" id='numDiv4' name='4'
+                                        href="#">4</a>
+                                    <a class="dropdown-item" id='numDiv5' name='5'
+                                        href="#">5</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7" style="text-align: right;">
+                            <p id='numStocksBasket' value='1' style="margin-right:10px;">Number of stock(s) in basket
+                                currently: <span id='count'>1</span></p>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class='col-md-7'
+                            style='font-size:16px; text-align: left; margin-top:7px; margin-left:14px;'>Select
+                            Recommended Stocks:</div>
+                        <div class='col-md-4' style="margin-left:40px;"><input type='text' class='form-control'
+                                placeholder="Search Stock:"></div>
+                    </div>
+                    <div class='container'>
+                        <div class='row' style='margin-top:30px; margin-left:100px;'>
+                            <div class='col-md-2'>
+                                <button type="button" id='Tesla' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Tesla
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='Amazon' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Amazon
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='Apple' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Apple
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='Netflix' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Netflix
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='Alibaba' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Alibaba
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='container'>
+                        <div class='row' style='margin-top:30px; margin-left:100px;'>
+                            <div class='col-md-2'>
+                                <button type="button" id='Google' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Google
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='Shopify' onClick='stockSelected(this.id)' style='width:80px; align-content: center;'
+                                    class="btn btn-light">Shopify
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='AMD' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">AMD
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='Nvidia' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Nvidia
+                                </button>
+                            </div>
+                            <div class='col-md-2' style='margin-left:0px;'>
+                                <button type="button" id='Twitter' onClick='stockSelected(this.id)' style='width:80px;' class="btn btn-light">Twitter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Choose Cash Allocation</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src='/js/StratBuilder.js'></script>
+
+
+</body>
+
+</html>

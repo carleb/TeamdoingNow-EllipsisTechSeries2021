@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Jerry</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/cover.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand" style="position: absolute;">Team doingNOW</h3>
+                <nav class="nav nav-masthead justify-content-center" style="position: relative; margin-left:300px">
+                    <a class="nav-link active" href="home.html">Home</a>
+                    <a class='nav-link' href='StratBuilder.html'>Strategy Builder</a>
+                    <a class='nav-link' href='Strategies.html'>My Strategies</a>
+
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Select a Stock to build your strategy on</h1>
+            <p class="lead">Learn more about strategy building with us today
+            </p>
+            <div class='container'>
+                <div class=row>
+                    <div class='col-md-8' style='font-size:20px; text-align: left;' >Recommended Stocks:</div>
+                    <div class='col-md-4'><input type='text' class='form-control' placeholder="Search Stock:"></div>
+                </div>
+            </div>
+            <div class='container'>
+                <div class='row' style='margin-top:30px;'>
+                    <div class='col-md-2' >
+                        <button type="button" id='stock1' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Tesla
+                        </button>
+                    </div>
+                    <div class='col-md-2' style='margin-left:20px;'>
+                        <button type="button" id='stock2' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Amazon
+                        </button>
+                    </div>
+                    <div class='col-md-2' style='margin-left:20px;'>
+                        <button type="button" id='stock3' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Apple
+                        </button>
+                    </div>
+                    <div class='col-md-2' style='margin-left:20px;'>
+                        <button type="button" id='stock4' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Netflix
+                        </button>
+                    </div>
+                    <div class='col-md-2' style='margin-left:20px;'>
+                        <button type="button" id='stock5' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Alibaba
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class='container'>
+              <div class='row' style='margin-top:30px;'>
+                <div class='col-md-2' >
+                    <button type="button" id='stock6' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Google
+                    </button>
+                </div>
+                <div class='col-md-2' style='margin-left:20px;'>
+                    <button type="button" id='stock7' onclick=(selectStock(this.id)) style='width:80px; align-content: center;' class="btn btn-light">Shopify
+                    </button>
+                </div>
+                <div class='col-md-2' style='margin-left:20px;'>
+                    <button type="button" id='stock8' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">AMD
+                    </button>
+                </div>
+                <div class='col-md-2' style='margin-left:20px;'>
+                    <button type="button" id='stock9' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Nvidia
+                    </button>
+                </div>
+                <div class='col-md-2' style='margin-left:20px;'>
+                    <button type="button" id='stock10' onclick=(selectStock(this.id)) style='width:80px;' class="btn btn-light">Twitter
+                    </button>
+                </div>
+            </div>
+            </div>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Ellipsis Hackathon 2021, Team doingNow</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src='/js/StratBuilder.js'></script>
+
+</body>
+
+</html>
