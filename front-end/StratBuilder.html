@@ -127,7 +127,7 @@ A fractal will form when a particular price pattern happens on a chart." data-pl
                 </div>
             </nav>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-                <div style='margin-left:500px; margin-top: 60px;''>
+                <div style='margin-left:300px; margin-top: 60px;''>
                     <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless"
                         src="about:blank" position="relative" height="800px" width="1570px"
                         max-width="100%"></iframe>
@@ -559,7 +559,7 @@ A fractal will form when a particular price pattern happens on a chart." data-pl
 
     <!-- Finalise Strat -->
     <div class="modal" id="finalModal">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content" style='background-color: #333;'>
                 <!-- Modal Header -->
                 <div class="modal-header">
@@ -576,7 +576,7 @@ A fractal will form when a particular price pattern happens on a chart." data-pl
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class='row'>
-                        <div class='col-md-5'>
+                        <div class='col-md-4'>
                             <h6 style='font-weight:600;font-size:15px; text-decoration: underline;'>Order Placement per
                                 Trade</h6>
                             <br>
@@ -644,13 +644,15 @@ A fractal will form when a particular price pattern happens on a chart." data-pl
                             </div>
                             <br>
                             <button type="button" class="btn btn-dark" onclick='testStrategy()'>Finalise Logic</button>
-
                         </div>
-                        <div class='col-md-5'>
+                        <div class='col-md-8'>
                             <div class="col">
-                                <h6 style='font-weight:600;font-size:15px; text-decoration: underline;'>Past Data</h6>
+                                <h6 style='font-weight:600;font-size:15px; text-decoration: underline;'><span id='stockName2'></span> Back test results</h6>
                                 <h6 style='font-weight:600;font-size:12px;'>Finalise Logic to see back-test results</h6>
-                                <div id='showData'>
+                                <div id='showStats' style="display:none;">
+                                    <p>Initial Capital: <b>$100,000</b> Net Profit: <b>$<span id='netProfit'></span></b>   Win Rate: <b><span id='winRate'></span></b> Duration: <b>1 year</b></p>
+                                </div>
+                                <div id='showData' style='margin-bottom:20px;'>
                                     
                                 </div>
                             </div>

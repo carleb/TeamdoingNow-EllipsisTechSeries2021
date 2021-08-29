@@ -118,3 +118,24 @@ html, body {
 .modal {
   color: white;
 }
+
+
+/* Table */
+table {
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+tr {
+  border: 1px solid black;
+}
+
+th {
+  text-align: center;
+}
+
+td{
+  text-align: center;
+  height: 30px;
+}

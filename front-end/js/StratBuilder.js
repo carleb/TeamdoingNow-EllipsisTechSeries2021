@@ -31,158 +31,159 @@ function selectStockByValue(id) {
     window.location.href = '/StratBuilder.html';
 }
 
-//function getStockGraph() {
-//     var frame = document.getElementById('igraph');
+function getStockGraph() {
+    var frame = document.getElementById('igraph');
 
-//     var stock = sessionStorage.getItem('stock');
-//     stock = stock.trim();
-//     var link = 'http://44.197.224.254:5000/priceGraph?stock_symbol=';
-//     var backlink = '&indicators=[]';
-//     switch (stock) {
-//         case "Alibaba":
-//             var finalLink = link + "baba" + backlink;
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Tesla":
-//             var finalLink = link + "tsla" + backlink;
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Amazon":
-//             var finalLink = link + "amzn" + backlink;
+    var stock = sessionStorage.getItem('stock');
+    stock = stock.trim();
+    document.getElementById('stockName2').innerHTML = stock;
+    var link = 'http://44.238.204.76:5000/priceGraph?stock_symbol=';
+    var backlink = '&indicators=[]';
+    switch (stock) {
+        case "Alibaba":
+            var finalLink = link + "baba" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Tesla":
+            var finalLink = link + "tsla" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Amazon":
+            var finalLink = link + "amzn" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Apple":
-//             var finalLink = link + "aapl" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Apple":
+            var finalLink = link + "aapl" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Netflix":
-//             var finalLink = link + "nflx" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Netflix":
+            var finalLink = link + "nflx" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Google":
-//             var finalLink = link + "googl" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Google":
+            var finalLink = link + "googl" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Shopify":
-//             var finalLink = link + "shop" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Shopify":
+            var finalLink = link + "shop" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "AMD":
-//             var finalLink = link + "amd" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "AMD":
+            var finalLink = link + "amd" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Nvidia":
-//             var finalLink = link + "nvda" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Nvidia":
+            var finalLink = link + "nvda" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         case "Twitter":
-//             var finalLink = link + "twtr" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        case "Twitter":
+            var finalLink = link + "twtr" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//             break;
-//         default:
-//             var finalLink = link + "" + backlink;
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+            break;
+        default:
+            var finalLink = link + "" + backlink;
 
-//             var graphlink = urlRequester(finalLink);
-//             frame.src = graphlink;
-//     }
+            var graphlink = urlRequester(finalLink);
+            frame.src = graphlink;
+    }
 
 
-//     sessionStorage.setItem('url', finalLink);
+    sessionStorage.setItem('url', finalLink);
 
-//     setTimeout(function () {
-//         // Delayed code in here
-//         ;
-//         document.getElementById('igraph').contentWindow.location.reload();
-//     }, 3000); // 5000 = 5 seconds
+    setTimeout(function () {
+        // Delayed code in here
+        ;
+        document.getElementById('igraph').contentWindow.location.reload();
+    }, 3000); // 5000 = 5 seconds
 
-//     setTimeout(function () {
-//         // Delayed code in here
-//         ;
-//         document.getElementById('igraph').contentWindow.location.reload();
-//     }, 1000); // 5000 = 5 seconds
+    setTimeout(function () {
+        // Delayed code in here
+        ;
+        document.getElementById('igraph').contentWindow.location.reload();
+    }, 1000); // 5000 = 5 seconds
 
-// }
+}
 
 //First update to URL
-// function updateStockGraph(name) {
-//     var src = sessionStorage.getItem('url');
+function updateStockGraph(name) {
+    var src = sessionStorage.getItem('url');
 
 
-//     shortenUrl = src.slice(0, (src.length - 1));
-
-
-
-//     newUrl = shortenUrl + name + "]";
+    shortenUrl = src.slice(0, (src.length - 1));
 
 
 
-//     var newGraphLink = urlRequester(newUrl);
-
-
-//     document.getElementById('igraph').src = newGraphLink;
-
-//     sessionStorage.setItem('url', newUrl);
-
-//     setTimeout(function () {
-//         // Delayed code in here
-//         document.getElementById('igraph').contentWindow.location.reload();
-//     }, 3000); // 5000 = 5 seconds
-
-//     setTimeout(function () {
-//         // Delayed code in here
-//         document.getElementById('igraph').contentWindow.location.reload();
-//     }, 1000); // 5000 = 5 seconds
-// }
-
-
-// //Second update to URL
-// function updateStockGraph2(name) {
-//     var src = sessionStorage.getItem('url');
-
-
-//     shortenUrl = src.slice(0, (src.length - 1));
+    newUrl = shortenUrl + name + "]";
 
 
 
-//     newUrl = shortenUrl + name + "]";
-
-//     var newGraphLink = urlRequester(newUrl);
-
-//     document.getElementById('igraph').src = newGraphLink;
-
-//     sessionStorage.setItem('url', newUrl);
+    var newGraphLink = urlRequester(newUrl);
 
 
-//     setTimeout(function () {
-//         // Delayed code in here
-//         ;
-//         document.getElementById('igraph').contentWindow.location.reload();
-//     }, 3000); // 5000 = 5 seconds
+    document.getElementById('igraph').src = newGraphLink;
 
-//     setTimeout(function () {
-//         // Delayed code in here
-//         ;
-//         document.getElementById('igraph').contentWindow.location.reload();
-//     }, 1000); // 5000 = 5 seconds
-// }
+    sessionStorage.setItem('url', newUrl);
+
+    setTimeout(function () {
+        // Delayed code in here
+        document.getElementById('igraph').contentWindow.location.reload();
+    }, 3000); // 5000 = 5 seconds
+
+    setTimeout(function () {
+        // Delayed code in here
+        document.getElementById('igraph').contentWindow.location.reload();
+    }, 1000); // 5000 = 5 seconds
+}
+
+
+//Second update to URL
+function updateStockGraph2(name) {
+    var src = sessionStorage.getItem('url');
+
+
+    shortenUrl = src.slice(0, (src.length - 1));
+
+
+
+    newUrl = shortenUrl + name + "]";
+
+    var newGraphLink = urlRequester(newUrl);
+
+    document.getElementById('igraph').src = newGraphLink;
+
+    sessionStorage.setItem('url', newUrl);
+
+
+    setTimeout(function () {
+        // Delayed code in here
+        ;
+        document.getElementById('igraph').contentWindow.location.reload();
+    }, 3000); // 5000 = 5 seconds
+
+    setTimeout(function () {
+        // Delayed code in here
+        ;
+        document.getElementById('igraph').contentWindow.location.reload();
+    }, 1000); // 5000 = 5 seconds
+}
 
 
 function addIndicator(id) {
@@ -287,7 +288,7 @@ function editIndicator1() {
     document.getElementById('afterH1').style.display = 'flex';
 
     if (counter == 2) {
-        document.getElementById('testBtn').style.display = 'flex';
+        document.getElementById('testBtn').style.display = 'block';
     }
 
     urlCounter += 1;
@@ -318,7 +319,7 @@ function editIndicator2() {
     document.getElementById('afterH2').style.display = 'flex';
 
     if (counter == 2) {
-        document.getElementById('testBtn').style.display = 'flex';
+        document.getElementById('testBtn').style.display = 'block';
     }
 
     urlCounter += 1;
@@ -359,7 +360,7 @@ function editIndicator3() {
     document.getElementById('afterH3').style.display = 'flex';
 
     if (counter == 2) {
-        document.getElementById('testBtn').style.display = 'flex';
+        document.getElementById('testBtn').style.display = 'block';
     }
 }
 
@@ -395,7 +396,7 @@ function testStrategy() {
             var st = "amzn";
             break;
         case "Apple":
-            var st = 'appl';
+            var st = 'aapl';
             break;
         case "Netflix":
             var st = 'nflx';
@@ -431,7 +432,7 @@ function testStrategy() {
     deserializeJSON(myDict);
 }
 
-function deserializeJSON(myDict){
+function deserializeJSON(myDict) {
     console.log(myDict);
     var arr_from_json = JSON.parse(myDict);
     console.log(arr_from_json);
@@ -443,16 +444,26 @@ function deserializeJSON(myDict){
     console.log(records);
 
     records_to_table(records);
+    stats_to_display(stats);
 }
 
-function records_to_table(records){
+function stats_to_display(stats) {
+    var netProfit = document.getElementById('netProfit');
+    var winRate = document.getElementById('winRate');
 
-    console.log(records);
+    netProfit.innerHTML = stats.netProfit;
+    winRate.innerHTML = stats.winRate;
+
+    document.getElementById('showStats').style.display = 'flex';
+    console.log("Stats done!");
+}
+
+function records_to_table(records) {
 
     var col = [];
-    for(var i = 0; i < records.length;i++){
-        for (var key in records[i]){
-            if(col.indexOf(key) === -1){
+    for (var i = 0; i < records.length; i++) {
+        for (var key in records[i]) {
+            if (col.indexOf(key) === -1) {
                 col.push(key);
             }
         }
@@ -461,20 +472,29 @@ function records_to_table(records){
     var table = document.createElement('table');
 
     var tr = table.insertRow(-1);
-    
-    for (var i = 0;i < col.length;i++){
+
+    var colNames = ["Close Date", "Close Price", "Open Date", "Open Price", "% Change", "Profit", "Quantity", "Win/Lose"];
+
+    for (var i = 0; i < colNames.length; i++) {
         var th = document.createElement('th');
-        th.innerHTML = col[i];
+        th.innerHTML = colNames[i];
         tr.appendChild(th);
     }
 
-    for (var i = 0; i < records.length;i++){
-        
+    for (var i = 0; i < records.length; i++) {
+
         tr = table.insertRow(-1);
-        console.log(records[i]);
-        for(var j = 0; j < col.length; j++){
+        for (var j = 0; j < col.length; j++) {
             var tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = records[i][col[j]];
+            console.log(col[j]);
+            if (col[j] == "closeDate" || col[j] == "openDate") {
+                x = records[i][col[j]];
+                var newDate = new Date(x.match(/\d+/) * 1);
+                finDate = newDate.format("dd/m/yyyy");
+                tabCell.innerHTML = finDate;
+            } else {
+                tabCell.innerHTML = records[i][col[j]];
+            }
         }
     }
 
@@ -610,3 +630,127 @@ function urlRequester(url) {
     console.log(xmlHttp.responseText);
     return xmlHttp.responseText;
 }
+
+/*
+ * Date Format 1.2.3
+ * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+ * MIT license
+ *
+ *
+ * Includes enhancements by Scott Trenda <scott.trenda.net>
+ * and Kris Kowal <cixar.com/~kris.kowal/>
+ *
+*/
+
+var dateFormat = function () {
+    var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
+        timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
+        timezoneClip = /[^-+\dA-Z]/g,
+        pad = function (val, len) {
+            val = String(val);
+            len = len || 2;
+            while (val.length < len) val = "0" + val;
+            return val;
+        };
+
+    // Regexes and supporting functions are cached through closure
+    return function (date, mask, utc) {
+        var dF = dateFormat;
+
+        // You can't provide utc if you skip other args (use the "UTC:" mask prefix)
+        if (arguments.length == 1 && Object.prototype.toString.call(date) == "[object String]" && !/\d/.test(date)) {
+            mask = date;
+            date = undefined;
+        }
+
+        // Passing date through Date applies Date.parse, if necessary
+        date = date ? new Date(date) : new Date;
+        if (isNaN(date)) throw SyntaxError("invalid date");
+
+        mask = String(dF.masks[mask] || mask || dF.masks["default"]);
+
+        // Allow setting the utc argument via the mask
+        if (mask.slice(0, 4) == "UTC:") {
+            mask = mask.slice(4);
+            utc = true;
+        }
+
+        var _ = utc ? "getUTC" : "get",
+            d = date[_ + "Date"](),
+            D = date[_ + "Day"](),
+            m = date[_ + "Month"](),
+            y = date[_ + "FullYear"](),
+            H = date[_ + "Hours"](),
+            M = date[_ + "Minutes"](),
+            s = date[_ + "Seconds"](),
+            L = date[_ + "Milliseconds"](),
+            o = utc ? 0 : date.getTimezoneOffset(),
+            flags = {
+                d: d,
+                dd: pad(d),
+                ddd: dF.i18n.dayNames[D],
+                dddd: dF.i18n.dayNames[D + 7],
+                m: m + 1,
+                mm: pad(m + 1),
+                mmm: dF.i18n.monthNames[m],
+                mmmm: dF.i18n.monthNames[m + 12],
+                yy: String(y).slice(2),
+                yyyy: y,
+                h: H % 12 || 12,
+                hh: pad(H % 12 || 12),
+                H: H,
+                HH: pad(H),
+                M: M,
+                MM: pad(M),
+                s: s,
+                ss: pad(s),
+                l: pad(L, 3),
+                L: pad(L > 99 ? Math.round(L / 10) : L),
+                t: H < 12 ? "a" : "p",
+                tt: H < 12 ? "am" : "pm",
+                T: H < 12 ? "A" : "P",
+                TT: H < 12 ? "AM" : "PM",
+                Z: utc ? "UTC" : (String(date).match(timezone) || [""]).pop().replace(timezoneClip, ""),
+                o: (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+                S: ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
+            };
+
+        return mask.replace(token, function ($0) {
+            return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
+        });
+    };
+}();
+
+// Some common format strings
+dateFormat.masks = {
+    "default": "ddd mmm dd yyyy HH:MM:ss",
+    shortDate: "m/d/yy",
+    mediumDate: "mmm d, yyyy",
+    longDate: "mmmm d, yyyy",
+    fullDate: "dddd, mmmm d, yyyy",
+    shortTime: "h:MM TT",
+    mediumTime: "h:MM:ss TT",
+    longTime: "h:MM:ss TT Z",
+    isoDate: "yyyy-mm-dd",
+    isoTime: "HH:MM:ss",
+    isoDateTime: "yyyy-mm-dd'T'HH:MM:ss",
+    isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
+};
+
+// Internationalization strings
+dateFormat.i18n = {
+    dayNames: [
+        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    ],
+    monthNames: [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    ]
+};
+
+// For convenience...
+Date.prototype.format = function (mask, utc) {
+    return dateFormat(this, mask, utc);
+};
+
